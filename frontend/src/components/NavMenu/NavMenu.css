@@ -1,0 +1,44 @@
+.nav-menu > a {
+ cursor: pointer;
+ margin: 0 2rem;
+}
+.nav-menu > a:hover {
+ opacity: 0.5;
+}
+.nav-menu > a.active-list {
+ border-bottom: 1px solid black;
+}
+.nav-menu {
+ z-index: 100;
+ background-color: white;
+ position: -webkit-sticky; /* Safari */
+ position: sticky;
+ height: 5rem;
+ top: 0;
+ width: 100%;
+ display: flex;
+ box-shadow: 0 0 1.1rem #d4d7dd;
+ justify-content: flex-end;
+ align-items: center;
+ font-size: 20px;
+}
+.nav-menu > button {
+ background-color: #d4d7dd;
+ height: 100%;
+ padding: 0 2rem;
+}
+.nav-menu > button::after {
+ content: ' Create todo';
+}
+
+@media (max-width: 900px ) {
+ .nav-menu > a {
+  margin: 0 0.8rem;
+ }
+ .nav-menu > button::after {
+  content: '';
+ }
+ .nav-menu {
+  justify-content: flex-end;
+ }
+}

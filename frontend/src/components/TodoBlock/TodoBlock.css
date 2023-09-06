@@ -1,0 +1,8 @@
+.todo-block > header,.todo-block > .todo-list {
+    padding: 1rem;
+}
+
+.todo-block {
+    height: 100%;
+    width: 100%;
+}
