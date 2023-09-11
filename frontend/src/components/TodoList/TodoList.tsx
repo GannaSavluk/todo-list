@@ -1,15 +1,17 @@
 import React, { memo } from 'react';
 import './TodoList.css'
 import TodoItem from "../TodoItem/TodoItem";
-import { TodoListType} from "../types/todoList";
+import { TodoListType, Icons } from "../types/todoList";
 import trashIcon from './trash.svg'
+import editIcon from "./editIcon.svg"
 
 export type TodoListProps = {
-    onChange: (val: number | string, type: 'delete' | 'update') => void,
-    todos: TodoListType[],
+    onChange: (val: number | string, type: 'delete' | 'update') => void;
+    todos: TodoListType[];
+    openModal: (id: string) => void;
 }
 
-function TodoList({ onChange, todos }: TodoListProps): JSX.Element {
+function TodoList({ onChange, todos, openModal }: TodoListProps): JSX.Element {
 
   return (
     <div className="todo-list">
@@ -20,8 +22,9 @@ function TodoList({ onChange, todos }: TodoListProps): JSX.Element {
                     className="one-task"
                     onClick={(e) => {
                         const target = e.target as HTMLElement;
-                        if (target.tagName === 'IMG') onChange(task.id, 'delete')
-                        else onChange(task.id, 'update')
+                        if (target.id === Icons.Delete) onChange(task.id, 'delete');
+                        if (target.id === Icons.Edit) openModal(task.id.toString());
+                        else onChange(task.id, 'update');
                     }}
                 >
                     <TodoItem
@@ -29,11 +32,20 @@ function TodoList({ onChange, todos }: TodoListProps): JSX.Element {
                         changeValue={() => onChange(task.id, 'update')}
                         label={task.taskName}
                     />
-                    <img
-                        src={trashIcon}
-                        alt="delete icon"
-                        width="17"
-                    />
+                    <div className="icons-wrapper">
+                        <img
+                         src={editIcon}
+                         alt={Icons.Edit}
+                         width="17"
+                         id={Icons.Edit}
+                        />
+                        <img
+                         src={trashIcon}
+                         alt={Icons.Delete}
+                         width="17"
+                         id={Icons.Delete}
+                        />
+                    </div>
                 </div>
             )
         })}

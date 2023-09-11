@@ -2,9 +2,15 @@ import React from 'react';
 import {List, ListType} from "../types/todoList";
 import './NavMenu.css'
 
-type NavMenuProps = { type: ListType; onChange: (val: ListType) => void }
+type NavMenuProps = {
+    type: ListType;
+    onChange: (val: ListType) => void;
+    openModal: () => void;
+}
+
 const listTypeArray: ListType[] = Object.values(List);
-function NavMenu({type = 'All', onChange}: NavMenuProps): JSX.Element {
+
+function NavMenu({type = 'All', onChange, openModal}: NavMenuProps): JSX.Element {
 
   return (
           <nav className="nav-menu">
@@ -15,7 +21,7 @@ function NavMenu({type = 'All', onChange}: NavMenuProps): JSX.Element {
                       </a>
                   )
               })}
-              <button>+</button>
+              <button onClick={openModal}>+</button>
           </nav>
   );
 }

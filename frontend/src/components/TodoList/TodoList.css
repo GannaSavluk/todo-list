@@ -29,3 +29,10 @@
     min-height: 1rem;
     cursor: pointer;
 }
+
+.icons-wrapper {
+    width: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

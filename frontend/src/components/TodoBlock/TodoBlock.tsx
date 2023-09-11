@@ -1,13 +1,14 @@
 import React, {useCallback, useEffect, useState} from 'react';
+import {v4 as uuidv4} from 'uuid';
 import './TodoBlock.css'
 import TodoList from "../TodoList/TodoList";
 import NavMenu from "../NavMenu/NavMenu";
-import {List, ListType, TodoListType} from "../types/todoList";
-
+import { List, ListType, TodoListType, ModalType } from "../types/todoList";
+import AddTodoModal from "../Modals/AddTodoModal/AddTodoModal";
 
 const defaultTodo: TodoListType[] = [
-    {done: true, taskName: 'wash hands', id: 'vbvxddsdcxyt6'},
-    {done: false, taskName: 'brush teeth', id: 'v76frtfcxyt6'},
+    {done: true, taskName: 'wash hands', id: uuidv4()},
+    {done: false, taskName: 'brush teeth', id: uuidv4()},
 ]
 
 const handleListType = (item: ListType, list: TodoListType[]): TodoListType[] => {
@@ -22,6 +23,8 @@ function TodoBlock(): JSX.Element {
     const [initialTodos, setInitialTodos] = useState<TodoListType[]>(defaultTodo)
     const [currentTodoList, setCurrentTodoList] = useState<TodoListType[]>([])
     const [listType, setListType] = useState<ListType>('All')
+    const [activeId, setActiveId] = useState<string>('')
+    const [isAddTodoModalOpened, setAddTodoModalOpened] = useState<boolean>(false)
 
     useEffect(() => {
         const currentList = handleListType(listType, initialTodos)
@@ -40,15 +43,37 @@ function TodoBlock(): JSX.Element {
         setInitialTodos(updatedTodos)
     },[currentTodoList])
 
+    const onChangeTodos = useCallback((value: string, type?: ModalType, id?: string ) => {
+        if (type === 'edit' && id) {
+            setInitialTodos(initialTodos.map((todo) => todo.id === id ? {...todo, taskName: value} : todo))
+        } else {
+            setInitialTodos([...initialTodos, { done: false, id: uuidv4(), taskName: value }])
+        }
+    },[initialTodos])
+
   return (
       <div className="todo-block">
           <header>
               <h1>My todos</h1>
           </header>
-          <NavMenu type={listType} onChange={setListType} />
+          <NavMenu type={listType} onChange={setListType} openModal={() => setAddTodoModalOpened(true)} />
           <TodoList
               onChange={updateTodos}
               todos={currentTodoList}
+              openModal={(id) => {
+                  setActiveId(id);
+                  setAddTodoModalOpened(true);
+              }}
+          />
+          <AddTodoModal
+              isOpen={isAddTodoModalOpened}
+              onClose={() => {
+                  setAddTodoModalOpened(false);
+                  setActiveId('');
+              }}
+              onSave={onChangeTodos}
+              id={activeId}
+              value={currentTodoList.find(el => el.id === activeId)?.taskName || ''}
           />
       </div>
   );

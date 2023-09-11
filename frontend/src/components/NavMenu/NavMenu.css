@@ -9,7 +9,6 @@
  border-bottom: 1px solid black;
 }
 .nav-menu {
- z-index: 100;
  background-color: white;
  position: -webkit-sticky; /* Safari */
  position: sticky;
@@ -17,7 +16,7 @@
  top: 0;
  width: 100%;
  display: flex;
- box-shadow: 0 0 1.1rem #d4d7dd;
+ box-shadow: var(--box-shadow);
  justify-content: flex-end;
  align-items: center;
  font-size: 20px;

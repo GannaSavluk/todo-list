@@ -1,0 +1,44 @@
+.add-todo-modal {
+    background-color: white;
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+    width: 40%;
+    height: fit-content;
+    z-index: 300;
+    position: relative;
+    padding: 2rem;
+}
+.add-todo-modal > img {
+    cursor: pointer;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}
+.ReactModal__Overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.add-todo-modal > form > footer {
+    float: right;
+    padding: 1rem 0;
+}
+
+.add-todo-modal > form > label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 18px;
+    font-weight: lighter;
+}
+.add-todo-modal > form > label > textarea {
+    resize: none;
+    height: fit-content;
+    font-size: 20px;
+}
+label > textarea:focus-visible {
+    border: var(--border-focus);
+}
+footer > button {
+    margin: 0 0 0 1rem;
+}
