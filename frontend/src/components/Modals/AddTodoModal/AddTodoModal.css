@@ -41,4 +41,8 @@ label > textarea:focus-visible {
 }
 footer > button {
     margin: 0 0 0 1rem;
+    background-color: unset;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-coulor);
+    padding: 0.2rem 1rem;
 }

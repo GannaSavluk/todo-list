@@ -1,15 +1,18 @@
 import React from 'react';
 
-export type TodoItemProps = { value: boolean; changeValue: () => void, label: string }
+export type TodoItemProps = {
+    value: boolean;
+    label: string
+}
 
-function TodoItem({value, changeValue, label}: TodoItemProps) {
+function TodoItem({value, label}: TodoItemProps) {
   return (
     <div className="todo-item">
       <input
           type="checkbox"
           id="todoCheckbox"
           checked={value}
-          onChange={changeValue}
+          onChange={() => null}
       />
       <label htmlFor="todoCheckbox">{label}</label>
     </div>

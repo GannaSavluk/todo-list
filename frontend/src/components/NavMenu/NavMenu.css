@@ -1,12 +1,13 @@
-.nav-menu > a {
+.nav-menu > ul > li > a {
  cursor: pointer;
  margin: 0 2rem;
 }
-.nav-menu > a:hover {
+.nav-menu > ul > li > a:hover {
  opacity: 0.5;
 }
-.nav-menu > a.active-list {
- border-bottom: 1px solid black;
+.nav-menu > ul > li > a.active-list {
+ border-bottom: 2px solid black;
+ font-weight: 600;
 }
 .nav-menu {
  background-color: white;
@@ -30,8 +31,12 @@
  content: ' Create todo';
 }
 
+.nav-menu > ul {
+ display: flex;
+}
+
 @media (max-width: 900px ) {
- .nav-menu > a {
+ .nav-menu > ul > li > a {
   margin: 0 0.8rem;
  }
  .nav-menu > button::after {

@@ -23,13 +23,12 @@ function TodoList({ onChange, todos, openModal }: TodoListProps): JSX.Element {
                     onClick={(e) => {
                         const target = e.target as HTMLElement;
                         if (target.id === Icons.Delete) onChange(task.id, 'delete');
-                        if (target.id === Icons.Edit) openModal(task.id.toString());
+                        else if (target.id === Icons.Edit) openModal(task.id.toString());
                         else onChange(task.id, 'update');
                     }}
                 >
                     <TodoItem
                         value={task.done}
-                        changeValue={() => onChange(task.id, 'update')}
                         label={task.taskName}
                     />
                     <div className="icons-wrapper">

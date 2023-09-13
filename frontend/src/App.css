@@ -1,6 +1,7 @@
 :root {
     --box-shadow: 0 0 1.1rem #d9e0ee;
     --border-radius: 2px;
+    --border-coulor: #a5b2cc;
     --border-focus: 1px solid #a5b2cc;
 }
 
@@ -11,4 +12,15 @@ button {
     border: unset;
     cursor: pointer;
     font-size: 20px;
+}
+li {
+    list-style-type: none;
+}
+ul {
+    margin-left: 0;
+    padding-left: 0;
+}
+a {
+    text-decoration: none;
+    color: unset;
 }

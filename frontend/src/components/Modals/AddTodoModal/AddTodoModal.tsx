@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import './AddTodoModal.css'
 import closeIcon from "../closeIcon.svg";
@@ -14,6 +14,9 @@ type AddTodoModalProps = {
 
 function AddTodoModal({ isOpen, onClose, onSave, value = '', id } : AddTodoModalProps): JSX.Element {
   const [data, setData] = useState<string>('')
+  const [error, setError] = useState<boolean>(false)
+
+  useEffect(() => setData(value),[value])
 
   return <Modal
       className="add-todo-modal"
@@ -33,8 +36,10 @@ function AddTodoModal({ isOpen, onClose, onSave, value = '', id } : AddTodoModal
             name="add-todo-input"
             autoFocus={true}
             required={true}
-            onChange={(e) => setData(e?.currentTarget?.value)}
-            defaultValue={value}
+            onInput={(e) => setData(e?.currentTarget?.value || '')}
+            defaultValue={data}
+            placeholder="..."
+            style={error ? {borderColor: 'red'} : {}}
         />
       </label>
       <footer>
@@ -42,13 +47,17 @@ function AddTodoModal({ isOpen, onClose, onSave, value = '', id } : AddTodoModal
           type="submit"
           onClick={(e) => {
             e.preventDefault();
-            onSave(data, value ? 'edit' : 'create', id);
-            onClose();
+            if (!data) setError(true);
+            else {
+              setError(false);
+              onSave(data, value ? 'edit' : 'create', id);
+              onClose();
+            }
           }}
         >
-         Create
+          {value ? 'Save' : 'Create'}
         </button>
-        <button type="reset" onClick={onClose}>Reset</button>
+        <button type="reset" onClick={() => setData('')}>Clear</button>
       </footer>
     </form>
   </Modal>
